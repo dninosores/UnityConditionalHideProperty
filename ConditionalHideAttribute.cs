@@ -5,7 +5,7 @@ using System.Collections;
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
 //Modified by: dninosores
 
-namespace dninosores.UnityConditionalHideAttribute
+namespace dninosores.UnityEditorAttributes
 {
 
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property |
@@ -20,6 +20,8 @@ namespace dninosores.UnityConditionalHideAttribute
         }
 
         public FoldBehavior foldBehavior;
+
+        public string displayName = null;
 
 
         // Use this for initialization
@@ -43,6 +45,11 @@ namespace dninosores.UnityConditionalHideAttribute
             foldBehavior = FoldBehavior.And;
         }
 
+        public ConditionalHideAttribute(string field, object comparison, string displayName) : this(field, comparison)
+        {
+            this.displayName = displayName;
+        }
+
         public ConditionalHideAttribute(string[] fields, object[] comparisons, FoldBehavior foldBehavior = FoldBehavior.And)
         {
             this.foldBehavior = foldBehavior;
@@ -59,6 +66,12 @@ namespace dninosores.UnityConditionalHideAttribute
             {
                 conditions[i] = (fields[i], comparisons[i]);
             }
+        }
+
+        public ConditionalHideAttribute(string[] fields, object[] comparisons, string displayName, FoldBehavior foldBehavior = FoldBehavior.And) :
+            this(fields, comparisons, foldBehavior)
+        {
+            this.displayName = displayName;
         }
 
         public bool Combine(bool left, bool right)

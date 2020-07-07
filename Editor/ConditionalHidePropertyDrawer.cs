@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
 //Modified by: dninosores
 
-namespace dninosores.UnityConditionalHideAttribute
+namespace dninosores.UnityEditorAttributes
 {
 
     [CustomPropertyDrawer(typeof(ConditionalHideAttribute))]
@@ -23,7 +23,15 @@ namespace dninosores.UnityConditionalHideAttribute
             GUI.enabled = enabled;
             if (enabled)
             {
-                EditorGUI.PropertyField(position, property, label, true);
+                if (condHAtt.displayName == null)
+                {
+                    EditorGUI.PropertyField(position, property, label, true);
+                }
+                else
+                {
+                    EditorGUI.PropertyField(position, property, new GUIContent(condHAtt.displayName), true);
+                }
+                
             }
 
             GUI.enabled = wasEnabled;
