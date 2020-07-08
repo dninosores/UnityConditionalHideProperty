@@ -133,7 +133,7 @@ namespace dninosores.UnityEditorAttributes
 			switch (sourcePropertyValue.propertyType)
 			{
 				case SerializedPropertyType.Boolean:
-					return sourcePropertyValue.boolValue;
+					return sourcePropertyValue.boolValue == (bool)comparison;
 				case SerializedPropertyType.ObjectReference:
 					return sourcePropertyValue.objectReferenceValue != null;
 				case SerializedPropertyType.Enum:
