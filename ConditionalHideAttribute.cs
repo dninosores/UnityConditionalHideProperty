@@ -15,8 +15,8 @@ namespace dninosores.UnityEditorAttributes
         public (string field, object comparison)[] conditions;
         public enum FoldBehavior
         {
-            And,
-            Or
+            And = 0,
+            Or = 1
         }
 
         public FoldBehavior foldBehavior;
