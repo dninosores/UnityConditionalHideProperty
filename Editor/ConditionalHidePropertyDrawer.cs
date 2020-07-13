@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using Assets.dninosores.Test.Editor;
 
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
 //Modified by: dninosores
@@ -21,21 +22,41 @@ namespace dninosores.UnityEditorAttributes
 
 			bool wasEnabled = GUI.enabled;
 			GUI.enabled = enabled;
+
+			
 			if (enabled)
 			{
+				PropertyDrawer customDrawer = PropertyDrawerFinder.Find(property);
+
 				if (condHAtt.displayName == null)
 				{
-					EditorGUI.PropertyField(position, property, label, true);
+					if (customDrawer == null)
+					{
+						EditorGUI.PropertyField(position, property, label, true);
+					}
+					else
+					{
+						customDrawer.OnGUI(position, property, label);
+					}
 				}
 				else
 				{
-					EditorGUI.PropertyField(position, property, new GUIContent(condHAtt.displayName), true);
+					if (customDrawer == null)
+					{
+						EditorGUI.PropertyField(position, property, new GUIContent(condHAtt.displayName), true);
+					}
+					else
+					{
+						customDrawer.OnGUI(position, property, new GUIContent(condHAtt.displayName));
+					}
+					
 				}
 
 			}
 
 			GUI.enabled = wasEnabled;
 		}
+
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
@@ -44,7 +65,15 @@ namespace dninosores.UnityEditorAttributes
 
 			if (enabled)
 			{
-				return EditorGUI.GetPropertyHeight(property, label);
+				PropertyDrawer cust = PropertyDrawerFinder.Find(property);
+				if (cust != null)
+				{
+					return cust.GetPropertyHeight(property, label);
+				}
+				else
+				{
+					return EditorGUI.GetPropertyHeight(property, label);
+				}
 			}
 			else
 			{
@@ -129,19 +158,20 @@ namespace dninosores.UnityEditorAttributes
 
 		private bool CheckPropertyType(SerializedProperty sourcePropertyValue, object comparison)
 		{
-			//Note: add others for custom handling if desired
-			switch (sourcePropertyValue.propertyType)
-			{
-				case SerializedPropertyType.Boolean:
-					return sourcePropertyValue.boolValue == (bool)comparison;
-				case SerializedPropertyType.ObjectReference:
-					return sourcePropertyValue.objectReferenceValue != null;
-				case SerializedPropertyType.Enum:
-					return sourcePropertyValue.enumValueIndex == (int)comparison;
-				default:
-					Debug.LogError("Data type of the property used for conditional hiding [" + sourcePropertyValue.propertyType + "] is currently not supported");
-					return true;
-			}
+				//Note: add others for custom handling if desired
+				switch (sourcePropertyValue.propertyType)
+				{
+					case SerializedPropertyType.Boolean:
+						return sourcePropertyValue.boolValue == (bool)comparison;
+					case SerializedPropertyType.ObjectReference:
+						return sourcePropertyValue.objectReferenceValue != null;
+					case SerializedPropertyType.Enum:
+						return sourcePropertyValue.enumValueIndex == (int)comparison;
+					default:
+						Debug.LogError("Data type of the property used for conditional hiding [" + sourcePropertyValue.propertyType + "] is currently not supported");
+						return true;
+				}
+
 		}
 	}
 }
