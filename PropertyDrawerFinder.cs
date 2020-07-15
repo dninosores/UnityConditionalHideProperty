@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEditor;
 
 namespace dninosores.UnityEditorAttributes
@@ -39,7 +40,33 @@ namespace dninosores.UnityEditorAttributes
 			FieldInfo fi = parentType.GetField(fullPath[0]);
 			for (int i = 1; i < fullPath.Length; i++)
 			{
-				fi = fi.FieldType.GetField(fullPath[i]);
+				try
+				{
+					fi = fi.FieldType.GetField(fullPath[i]);
+					if (fi.FieldType.IsArray && i + 2 < fullPath.Length && fullPath[i + 1] == "Array")
+					{
+						string dataString = fullPath[i + 2];
+						Regex pattern = new Regex(@"^data\[\d+\]$");
+						Match m = pattern.Match(dataString);
+						if (m.Success)
+						{
+							if (i + 2 == fullPath.Length - 1)
+							{
+								break;
+							}
+							else
+							{
+								Type arrayType = fi.FieldType.GetElementType();
+								fi = arrayType.GetField(fullPath[i + 3]);
+								i += 3;
+							}
+
+						}
+					}
+				} catch (NullReferenceException n)
+				{
+					float a = 0;
+				}
 			}
 			return fi.FieldType;
 		}
