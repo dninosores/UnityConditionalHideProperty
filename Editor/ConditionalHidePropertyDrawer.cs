@@ -10,7 +10,9 @@ using Assets.dninosores.Test.Editor;
 
 namespace dninosores.UnityEditorAttributes
 {
-
+	/// <summary>
+	/// Hides a property in-editor if a certain condition isn't met.
+	/// </summary>
 	[CustomPropertyDrawer(typeof(ConditionalHideAttribute))]
 	public class ConditionalHidePropertyDrawer : PropertyDrawer
 	{
