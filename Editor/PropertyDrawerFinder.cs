@@ -41,28 +41,32 @@ namespace dninosores.UnityEditorAttributes
 			FieldInfo fi = parentType.GetField(fullPath[0], flags);
 			for (int i = 1; i < fullPath.Length; i++)
 			{
-				fi = fi.FieldType.GetField(fullPath[i], flags);
-
-				if (fi.FieldType.IsArray && i + 2 < fullPath.Length && fullPath[i + 1] == "Array")
+				if (fi.FieldType.IsArray && i + 2 < fullPath.Length && fullPath[i] == "Array")
 				{
-					string dataString = fullPath[i + 2];
+					string dataString = fullPath[i + 1];
 					Regex pattern = new Regex(@"^data\[\d+\]$");
 					Match m = pattern.Match(dataString);
 					if (m.Success)
 					{
-						if (i + 2 == fullPath.Length - 1)
+						if (i + 1 == fullPath.Length - 1)
 						{
 							break;
 						}
 						else
 						{
 							Type arrayType = fi.FieldType.GetElementType();
-							fi = arrayType.GetField(fullPath[i + 3], flags);
-							i += 3;
+							fi = arrayType.GetField(fullPath[i + 2], flags);
+							i += 2;
 						}
 
 					}
 				}
+				else
+				{
+					fi = fi.FieldType.GetField(fullPath[i], flags);
+				}
+
+				
 			}
 			return fi.FieldType;
 
