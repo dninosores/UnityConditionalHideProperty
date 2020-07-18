@@ -34,7 +34,7 @@ namespace dninosores.UnityEditorAttributes
 		/// Gets type of a serialized property.
 		/// </summary>
 		public static Type GetPropertyType(SerializedProperty property, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic |
-			BindingFlags.GetField | BindingFlags.GetProperty)
+			BindingFlags.GetField | BindingFlags.GetProperty | BindingFlags.Instance)
 		{
 			Type parentType = property.serializedObject.targetObject.GetType();
 			string[] fullPath = property.propertyPath.Split('.');
@@ -42,6 +42,7 @@ namespace dninosores.UnityEditorAttributes
 			for (int i = 1; i < fullPath.Length; i++)
 			{
 				fi = fi.FieldType.GetField(fullPath[i], flags);
+
 				if (fi.FieldType.IsArray && i + 2 < fullPath.Length && fullPath[i + 1] == "Array")
 				{
 					string dataString = fullPath[i + 2];
@@ -64,6 +65,7 @@ namespace dninosores.UnityEditorAttributes
 				}
 			}
 			return fi.FieldType;
+
 		}
 
 
