@@ -3,7 +3,6 @@ using UnityEditor;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
-using Assets.dninosores.Test.Editor;
 
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
 //Modified by: dninosores
