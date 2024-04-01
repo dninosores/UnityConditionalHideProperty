@@ -25,31 +25,6 @@ namespace ollyisonit.UnityEditorAttributes
 
 
 		/// <summary>
-		/// Only displays field in-editor if conditions are met
-		/// </summary>
-		/// <param name="foldBehavior">Should all conditions need to be met or only one?</param>
-		/// <param name="conditions">An array of condition, where each condition 
-		/// is tuple of the name of a field on this object and the value it
-		/// should be equal to in order for the condition to be satisfied.</param>
-		public ConditionalHideAttribute(FoldBehavior foldBehavior, params (string, object)[] conditions)
-		{
-			this.foldBehavior = foldBehavior;
-			this.conditions = conditions;
-		}
-
-		/// <summary>
-		/// Only displays field in-editor if all conditions are met.
-		/// </summary>
-		/// <param name="conditions">An array of condition, where each condition is tuple of the
-		/// name of a field on this object and the value it should 
-		/// be equal to in order for the condition to be satisfied.</param>
-		public ConditionalHideAttribute(params (string, object)[] conditions) : this(FoldBehavior.And, conditions)
-		{
-
-		}
-
-
-		/// <summary>
 		/// Only displays in-editor if the given field is equal to the given object.
 		/// </summary>
 		/// <param name="field">Field to use for determining whether this should display in-editor.</param>
