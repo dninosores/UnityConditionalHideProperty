@@ -5,7 +5,7 @@ A collection of dynamic property drawer attributes for use in the Unity Editor.
 ### ReadOnly Attribute
 Attribute that allows a field to be displayed in-editor but not edited.
 
-![](assets/read-only-example.PNG)
+![](readme-assets/read-only-example.PNG)
 
 ``` C#
     [ReadOnly]
@@ -15,7 +15,7 @@ Attribute that allows a field to be displayed in-editor but not edited.
 ### Rename Attribute
 Changes the display name of the field in-editor.
 
-![](assets/display-name-example.png)
+![](readme-assets/display-name-example.png)
 ``` C#
     [Rename("Display Name!")]
     public int hiddenName = 0;
@@ -26,7 +26,7 @@ Dynamically hides and shows fields in-editor based on the state of the object.
 
 Here's a simple example where two fields are hidden/shown based on the state of a tickbox:
 
-![](assets/ConditionalHideDemo1.gif)
+![](readme-assets/ConditionalHideDemo1.gif)
 
 ``` C#
     public bool toggle = true;
@@ -40,7 +40,7 @@ Here's a simple example where two fields are hidden/shown based on the state of 
 
 And a more complex example with multiple tickboxes are taken into account:
 
-![](assets/ConditionalHideDemo2.gif)
+![](readme-assets/ConditionalHideDemo2.gif)
 
 ``` C#
     public bool toggle2 = true;
