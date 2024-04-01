@@ -1,5 +1,5 @@
 #  Unity Editor Attributes
-A collection of custom property drawer attributes for use in the Unity Editor.
+A collection of dynamic property drawer attributes for use in the Unity Editor.
 ## Features
 
 ### ReadOnly Attribute
