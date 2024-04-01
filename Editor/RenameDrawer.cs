@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace dninosores.UnityEditorAttributes
+namespace ollyisonit.UnityEditorAttributes
 {
     // original code from https://answers.unity.com/questions/1487864/change-a-variable-name-only-on-the-inspector.html
 

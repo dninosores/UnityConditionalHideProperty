@@ -1,8 +1,8 @@
-﻿using dninosores.UnityEditorAttributes;
+﻿using ollyisonit.UnityEditorAttributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace dninosores.UnityPlaneRenderer
+namespace ollyisonit.UnityPlaneRenderer
 {
 	[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 	public class ReadOnlyDrawer : PropertyDrawer

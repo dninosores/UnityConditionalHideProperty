@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace dninosores.UnityEditorAttributes
+namespace ollyisonit.UnityEditorAttributes
 {
 	/// <summary>
 	/// Displays field in-editor, but does not allow it to be edited.
@@ -12,7 +12,7 @@ namespace dninosores.UnityEditorAttributes
 		/// </summary>
 		public ReadOnlyAttribute()
 		{
-		
+
 		}
 	}
 }

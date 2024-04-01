@@ -5,9 +5,9 @@ using System;
 using System.Text.RegularExpressions;
 
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
-//Modified by: dninosores
+//Modified by: ollyisonit
 
-namespace dninosores.UnityEditorAttributes
+namespace ollyisonit.UnityEditorAttributes
 {
 	/// <summary>
 	/// Hides a property in-editor if a certain condition isn't met.
@@ -24,7 +24,7 @@ namespace dninosores.UnityEditorAttributes
 			bool wasEnabled = GUI.enabled;
 			GUI.enabled = enabled;
 
-			
+
 			if (enabled)
 			{
 				PropertyDrawer customDrawer = PropertyDrawerFinder.Find(property);
@@ -50,7 +50,7 @@ namespace dninosores.UnityEditorAttributes
 					{
 						customDrawer.OnGUI(position, property, new GUIContent(condHAtt.displayName));
 					}
-					
+
 				}
 
 			}
@@ -159,19 +159,19 @@ namespace dninosores.UnityEditorAttributes
 
 		private bool CheckPropertyType(SerializedProperty sourcePropertyValue, object comparison)
 		{
-				//Note: add others for custom handling if desired
-				switch (sourcePropertyValue.propertyType)
-				{
-					case SerializedPropertyType.Boolean:
-						return sourcePropertyValue.boolValue == (bool)comparison;
-					case SerializedPropertyType.ObjectReference:
-						return sourcePropertyValue.objectReferenceValue != null;
-					case SerializedPropertyType.Enum:
-						return sourcePropertyValue.enumValueIndex == (int)comparison;
-					default:
-						Debug.LogError("Data type of the property used for conditional hiding [" + sourcePropertyValue.propertyType + "] is currently not supported");
-						return true;
-				}
+			//Note: add others for custom handling if desired
+			switch (sourcePropertyValue.propertyType)
+			{
+				case SerializedPropertyType.Boolean:
+					return sourcePropertyValue.boolValue == (bool)comparison;
+				case SerializedPropertyType.ObjectReference:
+					return sourcePropertyValue.objectReferenceValue != null;
+				case SerializedPropertyType.Enum:
+					return sourcePropertyValue.enumValueIndex == (int)comparison;
+				default:
+					Debug.LogError("Data type of the property used for conditional hiding [" + sourcePropertyValue.propertyType + "] is currently not supported");
+					return true;
+			}
 
 		}
 	}

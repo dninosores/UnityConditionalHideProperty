@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEditor;
 
-namespace dninosores.UnityEditorAttributes
+namespace ollyisonit.UnityEditorAttributes
 {
 	/// <summary>
 	/// Finds custom property drawer for a given type.
@@ -66,7 +66,7 @@ namespace dninosores.UnityEditorAttributes
 					fi = fi.FieldType.GetField(fullPath[i], flags);
 				}
 
-				
+
 			}
 			return fi.FieldType;
 
